@@ -1,0 +1,35 @@
+<div class="page-title">
+    <h4>Благотворители</h4>
+    <button 
+        class="waves-effect waves-light btn grey darken-1"
+        routerLink="/welldoers/new"
+    >
+        Добавить благотворителя
+    </button>
+</div>
+
+<div 
+    class="row"
+    *ngIf="welldoers$ | async as welldoers; else loader"
+>
+    <div class="col s12">
+        <div class="collection" *ngIf="welldoers.length !== 0; else empty">
+            <a 
+                *ngFor="let welldoer of welldoers"
+                [routerLink]="['/welldoers', welldoer._id]"
+                class="collection-item"
+            >
+                {{welldoer.name}}
+            </a>
+        </div>
+        <ng-template #empty>
+            <div class="center">
+                У вас нет ни одного благотворителя
+            </div>
+        </ng-template>
+    </div>
+</div>
+<ng-template #loader>
+    <app-loader></app-loader>
+</ng-template>
+

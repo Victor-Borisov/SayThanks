@@ -1,0 +1,49 @@
+<form
+    class="card"
+    [formGroup]="form"
+    (ngSubmit)="onSubmit()">
+    <div class="card-content">
+        <span class="card-title">Создать аккаунт</span>
+        <div class="input-field">
+            <input 
+                id="email" 
+                type="email" 
+                formControlName="email"
+                [ngClass]="{'invalid': form.get('email').invalid && form.get('email').touched}">
+            <label for="email">Email:</label>
+            <span
+            *ngIf="form.get('email').invalid && form.get('email').touched"
+            class="helper-text red-text">
+                <span *ngIf="form.get('email').errors['required']">Поле email обязательно для заполнения</span>
+                <span *ngIf="form.get('email').errors['email']">Адрес элетронной почты некорректен</span>
+            </span>
+        </div>
+        <div class="input-field">
+            <input 
+                id="password" 
+                type="password" 
+                formControlName="password"
+                [ngClass]="{'invalid': form.get('password').invalid && form.get('password').touched}">
+            <label for="password">Пароль:</label>
+            <span
+            *ngIf="form.get('password').invalid && form.get('password').touched"
+            class="helper-text red-text">
+                <span *ngIf="form.get('password').errors['required']">
+                    Пароль не должен быть пустым
+                </span>
+                <span *ngIf="form.get('password').errors['minlength'] && form.get('password').errors['minlength']['requiredLength']">
+                    Пароль не должен быть меньше {{form.get('password').errors['minlength']['requiredLength']}} символов.
+                    Сейчас {{form.get('password').errors['minlength']['actualLength']}}
+                </span>
+            </span>
+        </div>
+    </div>
+    <div class="card-action">
+        <button 
+            class="modal-action btn waves-effect"
+            type="submit"
+            [disabled]="form.invalid || form.disabled">
+            Создать
+        </button>
+    </div>
+</form>

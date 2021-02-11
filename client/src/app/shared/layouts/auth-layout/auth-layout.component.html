@@ -1,0 +1,47 @@
+<nav>
+    <div class="nav-wrapper grey darken-1">
+        <a routerLink="/" class="brand-logo">СкажиСпасибо</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li routerLinkActive="active">
+                <a routerLink="/login">Вход</a>
+            </li>
+            <li routerLinkActive="active">
+                <a routerLink="/register">Регистрация</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="nav-wrapper">
+    <blockquote class="flow-text">
+        <div class="row">
+            <div class="col s4 right-align">
+                <div class="row">Сделал добро - забудь, принял добро - помни.</div>
+                <div class="row">(народная мудрость)</div>
+            </div>
+            <div class="col s8">
+            </div>
+        </div>
+    </blockquote>
+    <div class="auth-block">
+        <router-outlet></router-outlet>
+    </div>
+    <p class="flow-text">Что делать, если вам сделали доброе дело? Единственное, что можно сделать - это сказать "Спасибо".</p>
+    <p class="flow-text">А что делать, если много людей сделали вам много добрых дел и хочется каждый день мысленно говорить им спасибо?</p>
+    <p class="flow-text">Чтобы никого не забыть, сделан данный сервис. 
+        В нём можно ввести своих благотворителей, для каждого доброго дела указать, сколько дней вы хотите говорить за это спасибо.
+    </p>
+    <p class="flow-text">Сервис "СкажиСпасибо" формирует вам ежедневную задачу - 
+        сказать спасибо каждому благотворителю за каждое доброе дело, пока не выйдет установленный вами срок.
+    </p>
+    <p class="flow-text">Чтобы вести свой список благотворителей и добрых дел, зарегистрируйтесь.</p>
+    <ul class="hide-on-large-only">
+        <li routerLinkActive="active">
+            <a routerLink="/login">Вход</a>
+        </li>
+        <li routerLinkActive="active">
+            <a routerLink="/register">Регистрация</a>
+        </li>
+    </ul>
+</div>
+

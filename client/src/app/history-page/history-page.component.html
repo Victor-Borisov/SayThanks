@@ -1,0 +1,49 @@
+<div class="page-title">
+  <h4>История спасибо</h4>
+  <button
+    (click)="clickFilterAppearance()"
+    class="btn btn-small"
+    [ngClass]="{
+      'active': isFilterVisible,
+      'red': isFiltered()
+    }"
+    data-tooltip="Фильтр"
+    data-position="left"
+    #tooltip
+  >
+    <i class="material-icons">filter_list</i>
+  </button>
+</div>
+  
+<app-history-filter
+  [hidden]="!isFilterVisible"
+  (onFilter)="applyFilter($event)"
+></app-history-filter>
+
+<div *ngIf="!reloading; else reloadingBlock">
+  <div *ngIf="thanks.length > 0; else empty">
+    <app-history-list [thanks]="thanks"></app-history-list>
+    <div
+      class="center mb2"
+      *ngIf="!noMoreThanks"
+    >
+      <button
+        class="btn waves-effect grey darken-1 btn-small"
+        (click)="loadMore()"
+        *ngIf="!loading; else loader"
+      >
+        Загрузить еще
+      </button>
+      <ng-template #loader>
+        <app-loader></app-loader>
+      </ng-template>
+    </div>
+  </div>
+  <ng-template #empty>
+    <div class="center">Спасибо пока нет.</div>
+  </ng-template>
+</div>
+
+<ng-template #reloadingBlock>
+  <app-loader></app-loader>
+</ng-template>

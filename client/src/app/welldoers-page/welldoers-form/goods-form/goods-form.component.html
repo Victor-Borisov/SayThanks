@@ -1,0 +1,96 @@
+<div class="row">
+    <div class="col s12">
+        <div class="page-subtitle">
+            <h4>Добрые дела:</h4>
+            <button class="waves-effect waves-light btn grey darken-1 btn-small"
+                (click)="onAddGood()"
+            >
+                Добавить доброе дело
+            </button>
+        </div>
+
+        <div *ngIf="!loading; else loader">
+            <div class="collection" *ngIf="goods.length !== 0; else empty">
+                <a 
+                    *ngFor="let good of goods"
+                    class="collection-item collection-item-icon"
+                    (click)="onSelectGood(good)"
+                >
+                    <span>
+                        {{good.description}} <br />Спасибо в течение, дней: <strong>{{good.lifetimeDays}}</strong>
+                    </span>
+                    <span>
+                        <i class="material-icons"
+                            (click)="onDeleteGood($event, good)"
+                        >delete</i>
+                    </span>
+                </a>
+            </div>
+            <ng-template #empty>
+                <div class="center">
+                    Добрые дела данного благотворителя ещё не введены
+                </div>
+            </ng-template>
+        </div>
+        <ng-template #loader>
+            <app-loader></app-loader>
+        </ng-template>
+</div>
+</div>
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="modal" #modal>
+        <div class="modal-content">
+            <h4 class="mb1">Добавить доброе дело</h4>
+            <div class="input-field">
+                <input
+                    formControlName="description"
+                    id="good-description"
+                    type="text"
+                    [ngClass]="{'invalid': form.get('description').invalid && form.get('description').touched}"
+                >
+                <label for="good-description">Описание</label>
+                <span
+                *ngIf="form.get('description').invalid && form.get('description').touched"
+                class="helper-text red-text"
+                >
+                    Описание не должно быть пустым.
+                </span>
+            </div>
+            <div class="input-field">
+                <input 
+                    id="good-lifetimeDays" type="text"
+                    type="number"
+                    min="1"
+                    formControlName="lifetimeDays"
+                    [ngClass]="{'invalid': form.get('lifetimeDays').invalid && form.get('lifetimeDays').touched}"
+                >
+                <label for="good-lifetimeDays">Длительность влияния</label>
+                <span
+                    *ngIf="form.get('lifetimeDays').invalid && form.get('lifetimeDays').touched"
+                    class="helper-text red-text"
+                >
+                    Введите корректную длительность влияния. Минимальное значение 1.
+                </span>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button
+                type="button"
+                (click)="onCancel()"
+                class="modal-action waves-effect waves-black btn-flat"
+                [disabled]="form.disabled"
+            >
+                Отмена
+            </button>
+            <button
+                class="modal-action btn waves-effect"
+                type="submit"
+                [disabled]="form.invalid || form.disabled"
+            >
+                Сохранить
+            </button>
+        </div>
+    </div>
+</form>
+

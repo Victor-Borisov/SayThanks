@@ -1,0 +1,31 @@
+<div *ngIf="thank$ | async as thank; else loader">
+  <table class="highlight" *ngIf="listToArray(thank.list).length !== 0; else empty">
+    <thead>
+    <tr>
+      <th>Добрые дела</th>
+      <th></th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr *ngFor="let thankGood of listToArray(thank.list)">
+      <td>{{thankGood.good_description}}</td>
+      <td>
+        <button
+          class="btn waves-effect wavers-light btn-small"
+          (click)="addToThank(thank._id, thankGood.good_id)"
+          [disabled]="thankGood.thanked == 1"
+        >Сказать спасибо</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+  <ng-template #empty>
+    <div class="center">Все спасибо сказаны</div>
+  </ng-template>
+</div>
+
+<ng-template #loader>
+  <app-loader></app-loader>
+</ng-template>

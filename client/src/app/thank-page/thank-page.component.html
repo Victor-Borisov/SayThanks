@@ -1,0 +1,10 @@
+  <div class="page-title">
+    <h4 *ngIf="isRoot">Сегодня нужно сказать спасибо</h4>
+    <h4 *ngIf="!isRoot">
+      <a routerLink="/saythanks">Сегодня</a>
+      <i class="material-icons">keyboard_arrow_right</i>
+      Сказать спасибо
+    </h4>
+  </div>
+  
+  <router-outlet></router-outlet>

@@ -1,0 +1,23 @@
+<div class="filter">
+  <div class="fr">
+    <div class="col filter-pickers">
+      <div class="input-field">
+        <input type="text" id="filter-start" [readonly]="true" #start>
+        <label for="filter-start">От</label>
+      </div>
+
+      <div class="input-field">
+        <input type="text" [readonly]="true" #end>
+        <label>до</label>
+      </div>
+    </div>
+  </div>
+
+  <button
+    class="btn waves-effect wavers-light btn-small"
+    (click)="submitFilter()"
+    [disabled]="!isValid"
+  >Применить фильтр
+  </button>
+</div>
+  

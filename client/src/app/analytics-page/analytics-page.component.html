@@ -1,0 +1,22 @@
+<div class="page-title">
+    <h4>Аналитика</h4>
+  </div>
+  
+  <div [style.display]="pending ? 'none' : 'block'">
+    <div class="average-price">
+      <p>Среднее количество сказанных спасибо в день: <strong>{{average}}</strong></p>
+    </div>
+  
+    <div class="analytics-block pb3">
+      <h5>Выполняемость поставленной ежедневной задачи</h5>
+      <canvas #ratio></canvas>
+    </div>
+  
+    <div class="analytics-block">
+      <h5>Количество сказанных спасибо</h5>
+      <canvas #thanks></canvas>
+    </div>
+  </div>
+  
+  <app-loader *ngIf="pending"></app-loader>
+  

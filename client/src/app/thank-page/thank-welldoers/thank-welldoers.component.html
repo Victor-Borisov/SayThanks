@@ -1,0 +1,35 @@
+<div *ngIf="!loading; else loader">
+    <div class="frow order-row" *ngIf="thankGoods.length !== 0; else empty">
+      <div
+        *ngFor="let welldoer_good of thankGoods"
+        class="card waves-effect pointer"
+        [routerLink]="['/saythanks', welldoer_good.welldoer_id]"
+      >
+        <div class="center">
+          <img
+            [src]="welldoer_good.welldoer_img ? welldoer_good.welldoer_img : '/uploads/nophoto.jpg'"
+            class="responsive-img order-img"
+          >
+        </div>
+        <div class="card-content center p10">
+          <h5 class="m0">{{welldoer_good.welldoer_name}}</h5>
+        </div>
+        <div class="card-content center p10">
+          <button
+          class="btn waves-effect wavers-light btn-small"
+          (click)="addToThank($event, thank_id, welldoer_good.welldoer_id)"
+          [disabled]="welldoer_good.thanked == 1"
+          >Сказать спасибо</button>
+
+        </div>
+      </div>
+    </div>
+    <ng-template #empty>
+      <div class="center">Спасибо говорить некому</div>
+    </ng-template>
+  </div>
+    
+  <ng-template #loader>
+    <app-loader></app-loader>
+  </ng-template>
+  

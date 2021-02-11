@@ -1,0 +1,84 @@
+<div class="page-title">
+    <h4>
+      Обзор за сегодня
+      ({{today | date:'dd.MM.yyyy'}})
+      <i class="material-icons black-text pointer" (click)="openInfo()">
+        info_outline
+      </i>
+    </h4>
+  </div>
+  
+  <div
+    class="row"
+    *ngIf="data$ | async as data; else loader"
+  >
+    <div class="col s12 l6">
+      <div class="card light-blue lighten-2 white-text">
+        <div class="card-content">
+          <span class="card-title">Задача выполнена:</span>
+          <h3>{{data.completedTask.today}} %</h3>
+          <h3
+            class="m0 mb1"
+            [ngClass]="{
+              'green-text text-darken-2': data.completedTask.isHigher,
+              'red-text': !data.completedTask.isHigher
+            }"
+          >
+            <i class="material-icons">
+              {{data.completedTask.isHigher ? 'arrow_upward' : 'arrow_downward'}}
+            </i>
+            {{data.completedTask.compare}} п.п.
+          </h3>
+          <p>
+            Выполненность задачи сегодня на
+            {{data.completedTask.compare}} процентных пункта
+            {{data.completedTask.isHigher ? 'выше' : 'ниже'}}
+            средней:
+            {{data.completedTask.middle}}
+            %
+          </p>
+        </div>
+      </div>
+    </div>
+  
+    <div class="col s12 l6">
+      <div class="card orange lighten-2 white-text">
+        <div class="card-content">
+          <span class="card-title">Сегодня сказано:</span>
+          <h3>{{data.sayedThanks.today}} спасибо</h3>
+          <h3
+            class="m0 mb1"
+            [ngClass]="{
+              'green-text text-darken-2': data.sayedThanks.isHigher,
+              'red-text': !data.sayedThanks.isHigher
+            }"
+          >
+            <i class="material-icons">
+              {{data.sayedThanks.isHigher ? 'arrow_upward' : 'arrow_downward'}}
+            </i>
+            {{data.sayedThanks.percent}}%
+          </h3>
+          <p>
+            Число сказанных спасибо сегодня на {{data.sayedThanks.percent}}%
+            или на {{data.sayedThanks.compare}}
+            спасибо
+            {{data.sayedThanks.isHigher ? 'выше' : 'ниже'}}
+            среднего значения в день: {{data.sayedThanks.middle}}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <ng-template #loader>
+    <app-loader></app-loader>
+  </ng-template>
+  
+  
+  <div class="tap-target" data-target="menu" #tapTarget>
+    <div class="tap-target-content">
+      <h5>С чего начать?</h5>
+      <p>Для нчала нужно зайти в "Мои благотворители", добавить там того, кому нужно сказать спасибо. Затем добаляются добрые дела. После этого можно переходить в "Сказать спасибо", мысленно говорить спасибо и нажимать кнопку справа от доброго дела</p>
+    </div>
+  </div>
+  
